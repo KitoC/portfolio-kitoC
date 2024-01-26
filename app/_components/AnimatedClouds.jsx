@@ -1,17 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react/dom";
 import { random } from "lodash";
-import styles from "./AnimatedClouds.module.css";
-
-const CSSCloud = () => {
-  return (
-    <div>
-      <div className={styles.cloud} />
-      <div className={`${styles.cloud} ${styles.shadow}`} />
-    </div>
-  );
-};
+import CSSCloud from "./CSSCloud";
 
 const AnimatedCloud = ({ startNow }) => {
   const [shouldRender, setShouldRender] = useState(startNow);
@@ -21,22 +13,22 @@ const AnimatedCloud = ({ startNow }) => {
   useEffect(() => {
     if (!shouldRender) return;
 
-    const timout = setTimeout(
-      () => {
-        setXPosition(random(-10, 110));
-        setDelay(random(0, 8000));
-      },
-      startNow ? 0 : 8000 + delay
-    );
+    const timout = setTimeout(() => {
+      setXPosition(random(-10, 110));
+      setDelay(random(0, 8000));
+    }, 8000 + delay);
 
     return () => clearTimeout(timout);
   }, [xPosition, delay, shouldRender, startNow]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setShouldRender(true);
-    }, random(0, 6000));
-  }, []);
+    setTimeout(
+      () => {
+        setShouldRender(true);
+      },
+      startNow ? 0 : random(0, 6000)
+    );
+  }, [startNow]);
 
   const scale = random(0.7, 1, true);
 
@@ -45,7 +37,7 @@ const AnimatedCloud = ({ startNow }) => {
   return (
     <div
       key={xPosition}
-      className="animate-cloudAnimation"
+      className="animate-[cloudAnimation_6s]"
       style={{
         scale,
         position: "absolute",
@@ -59,7 +51,7 @@ const AnimatedCloud = ({ startNow }) => {
 };
 
 const AnimatedClouds = () => {
-  return (
+  return createPortal(
     <div className="absolute w-screen h-screen left-0 top-0 z-0 overflow-hidden pointer-events-none">
       <AnimatedCloud startNow />
       <AnimatedCloud />
@@ -73,7 +65,8 @@ const AnimatedClouds = () => {
       <AnimatedCloud />
       <AnimatedCloud />
       <AnimatedCloud />
-    </div>
+    </div>,
+    document.getElementById("cloud_anchor")
   );
 };
 

@@ -28,7 +28,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/_components/AnimatedClouds.jsx",
-    "app/_components/Island.jsx"
+    "app/_components/Island.jsx",
+    "app/_components/Content.jsx"
   ],
   "exclude": ["node_modules"]
 }

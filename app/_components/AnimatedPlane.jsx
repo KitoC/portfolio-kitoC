@@ -57,8 +57,6 @@ const AnimatedPlane = () => {
     return () => clearInterval(interval);
   }, [isDipped, isMoving]);
 
-  console.log("isMoving", isMoving);
-
   useEffect(() => {
     const timout1 = setTimeout(() => {
       setPosition(positions.filter((pos) => pos !== position)[random(0, 5)]);
@@ -74,21 +72,18 @@ const AnimatedPlane = () => {
     };
   }, [position]);
 
+  const left = `calc(${x + random(-10, 10)}% - 100px)`;
+  const top = `calc(${y + random(-10, 10)}% ${y > 90 ? "-" : "+"} 146px)`;
+
   return (
     <div
       className="animate-[planeIdle_1.5s_ease-in-out_infinite]  w-[100px] h-[100px] absolute"
-      style={{
-        left: `calc(${x + random(-10, 10)}% - 100px)`,
-        top: `${
-          y === 100
-            ? `calc(${y + random(-10, 10)} - 100px)`
-            : y + random(-10, 10)
-        }%`,
-        zIndex: 100,
-        transition: "all 4s",
-      }}
+      style={{ left, top, zIndex: 100, transition: "all 4s" }}
     >
-      <div className="[perspective: 100px]" style={{ perspective: "100px" }}>
+      <div
+        className="[perspective: 100px]"
+        style={{ perspective: "100px", transform: "rotate(180deg)" }}
+      >
         <div
           style={{ perspective: "100px" }}
           className={clsx("w-fit relative", {
@@ -119,8 +114,8 @@ const AnimatedPlane = () => {
           <div
             className="absolute z-0"
             style={{
-              left: !isDipped ? "-70%" : "-90%",
-              top: !isDipped ? "70%" : "90%",
+              right: !isDipped ? "-70%" : "-90%",
+              bottom: !isDipped ? "70%" : "90%",
               transform: "scale(0.5)",
               transition: "all 1s",
             }}

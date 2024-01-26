@@ -28,7 +28,7 @@ const Content = () => {
           <Island>
             <div
               id="airstrip-1"
-              className="bg-gray-600 p-4 w-[200px] rounded flex text-black"
+              className="bg-gray-600 p-4 min-w-[60px] rounded flex text-black"
             />
             <div>
               <About />

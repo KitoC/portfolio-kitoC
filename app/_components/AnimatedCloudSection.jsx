@@ -42,19 +42,22 @@ const AnimatedCloud = ({ sectionId, id }) => {
 
 let section = 0;
 
-const AnimatedClouds = ({ children, hasIsland }) => {
+const AnimatedClouds = ({ children, hasIsland, flip }) => {
   const [sectionId] = useState(section++);
 
   if (hasIsland) {
     return (
       <div
         id={`cloud-section-${sectionId}`}
-        className="w-screen h-screen pointer-events-none relative flex"
+        className={clsx(
+          "w-screen pointer-events-none relative flex cloud-section",
+          { "flex-row-reverse": flip }
+        )}
       >
-        <div className=" p-24 w-2/3">{children}</div>
+        <div className="p-24 w-2/3">{children}</div>
 
-        <div class="w-1/3 relative">
-          {range(4).map((cloud) => (
+        <div class="grow relative">
+          {range(2).map((cloud) => (
             <AnimatedCloud key={cloud} id={cloud} sectionId={sectionId} />
           ))}
         </div>
@@ -67,7 +70,7 @@ const AnimatedClouds = ({ children, hasIsland }) => {
       id={`cloud-section-${sectionId}`}
       className="w-screen h-screen pointer-events-none relative"
     >
-      {range(8).map((cloud) => (
+      {range(4).map((cloud) => (
         <AnimatedCloud key={cloud} id={cloud} sectionId={sectionId} />
       ))}
     </div>

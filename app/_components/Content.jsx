@@ -1,6 +1,7 @@
 "use client";
 
 import About from "./About";
+import Experience from "./Experience";
 import Island from "./Island";
 import Plane from "./Plane";
 import AnimatedCloudSection from "./AnimatedCloudSection";
@@ -70,14 +71,13 @@ const Content = () => {
         </Island>
         <AnimatedCloudSection />
 
-        <AnimatedCloudSection>
-          <div id="Skills">Skills</div>
-        </AnimatedCloudSection>
+        <Island>
+          <p>Skills</p>
+        </Island>
 
         <AnimatedCloudSection />
-        <AnimatedCloudSection>
-          <div id="Experience">Experience</div>
-        </AnimatedCloudSection>
+
+        <Experience />
 
         <AnimatedCloudSection />
         <AnimatedCloudSection>

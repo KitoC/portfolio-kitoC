@@ -21,3 +21,10 @@
   opacity: 0.2;
   --color: black;
 }
+
+.silverLining {
+  transform: translate(-2%, -5%);
+  z-index: -1;
+  /* opacity: 0.2; */
+  --color: rgb(235, 227, 227);
+}

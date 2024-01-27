@@ -1,6 +1,5 @@
 "use client";
 
-import { random } from "lodash";
 import styles from "./AnimatedClouds.module.css";
 
 const CSSCloud = () => {
@@ -8,6 +7,7 @@ const CSSCloud = () => {
     <div>
       <div className={styles.cloud} />
       <div className={`${styles.cloud} ${styles.shadow}`} />
+      <div className={`${styles.cloud} ${styles.silverLining}`} />
     </div>
   );
 };

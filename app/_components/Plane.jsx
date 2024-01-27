@@ -5,7 +5,8 @@ import PlaneImage from "../_assets/plane-base.dxf.png";
 import PlaneShadow from "../_assets/plane-base-shadow.svg";
 import { usePrevious } from "../_utils/usePrevious";
 import clsx from "clsx";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
+import { random, throttle } from "lodash";
 
 const Animation = ({
   img,
@@ -86,30 +87,50 @@ const Animation = ({
   );
 };
 
-const Plane = () => {
-  const [isLanded, setIsLanded] = useState(true);
+const Plane = ({ isLanded, setIsLanded, initialCoords }) => {
   const [isIdle, setIsIdle] = useState(true);
-  const [coords, setCoords] = useState([0, 0]);
+  const [x, setX] = useState(initialCoords[0]);
+  const [y, setY] = useState(initialCoords[1]);
+
+  const throttledSetX = useRef(throttle((newX) => setX(newX), 1000));
+  const throttledSetY = useRef(throttle((newY) => setY(newY), 1000));
 
   const handleTakeoff = useCallback(() => {
     if (!isLanded) return;
     const airStrip = document.getElementById("airstrip-1");
-    const { left, top, height } = airStrip.getBoundingClientRect();
+    const { bottom } = airStrip.getBoundingClientRect();
 
-    if (top < 0 && Math.abs(top) + coords[1] >= height - 60) {
+    if (bottom <= 200) {
       setIsLanded(false);
     }
-  }, [coords, isLanded]);
+  }, [isLanded, setIsLanded]);
 
   useEffect(() => {
     const el = document.getElementById("scroll-container");
 
     const onScrollStart = () => {
-      handleTakeoff();
+      if (isLanded) {
+        handleTakeoff(el.scrollTop);
+      }
+
+      if (el.scrollTop <= 400) return;
+
+      const distance = 200;
+
+      const nextY = y + random(-distance, distance);
+      const nextX = x + random(-distance, distance);
+
+      if (!isLanded && nextY > 0 && nextY < window.screen.height) {
+        throttledSetY.current(nextY);
+      }
+
+      if (!isLanded && nextX > 0 && nextX < window.screen.width) {
+        throttledSetX.current(nextX);
+      }
+
       setIsIdle(false);
     };
     const onScrollEnd = () => {
-      console.log("scroll end");
       setIsIdle(true);
     };
 
@@ -119,27 +140,21 @@ const Plane = () => {
       el.removeEventListener("scroll", onScrollStart);
       el.removeEventListener("scrollend", onScrollEnd);
     };
-  }, [coords, handleTakeoff]);
-
-  useEffect(() => {
-    const airStrip = document.getElementById("airstrip-1");
-    const { left, top } = airStrip.getBoundingClientRect();
-
-    console.log({ left, top });
-    setCoords([left - 30, top]);
-    console.log(airStrip);
-  }, []);
+  }, [handleTakeoff, isLanded, y, x]);
 
   const shadowDisplacement = isLanded ? 13 : 80;
 
-  console.log({ coords });
   return (
-    <div className="absolute w-screen h-screen top-0 left-0  z-10 pointer-events-none flex">
+    <>
       <div
-        className="absolute w-[100px] h-[100px]"
+        onClick={handleTakeoff}
+        className="sticky w-[100px] h-0 z-10"
         style={{
-          transform: `translate(${coords[0]}px, ${coords[1]}px)`,
-          transition: "transform 2000ms ease-in-out 0ms",
+          left: `${x}px`,
+          top: `${y}px`,
+          transition: `all  ${isLanded ? "1000ms" : "2000ms"} ${
+            isLanded ? "ease-in" : "ease-out"
+          } 0ms`,
         }}
       >
         <div
@@ -150,12 +165,12 @@ const Plane = () => {
             transform: isLanded
               ? `scale(0.6) translateY(-30px)`
               : "scale(1) translateY(0)",
-            transition: "transform 2000ms ease-in-out 0ms",
+            transition: "transform 1000ms ease-in-out 0ms",
           }}
         >
           <Animation
             isLanded={isLanded}
-            coords={coords}
+            coords={[x, y]}
             isIdle={isIdle}
             img={PlaneShadow}
             offset={{
@@ -165,13 +180,13 @@ const Plane = () => {
           />
           <Animation
             isLanded={isLanded}
-            coords={coords}
+            coords={[x, y]}
             isIdle={isIdle}
             img={PlaneImage}
           />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

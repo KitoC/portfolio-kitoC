@@ -50,13 +50,13 @@ const AnimatedClouds = ({ children, hasIsland, flip }) => {
       <div
         id={`cloud-section-${sectionId}`}
         className={clsx(
-          "w-screen pointer-events-none relative flex cloud-section",
+          "w-screen pointer-events-none relative flex cloud-section gap-16",
           { "flex-row-reverse": flip }
         )}
       >
         <div className="p-24 w-2/3">{children}</div>
 
-        <div class="grow relative">
+        <div class=" p-10 grow relative">
           {range(2).map((cloud) => (
             <AnimatedCloud key={cloud} id={cloud} sectionId={sectionId} />
           ))}

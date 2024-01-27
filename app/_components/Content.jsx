@@ -71,11 +71,11 @@ const Content = () => {
         </Island>
         <AnimatedCloudSection />
 
-        <Island>
+        {/* <Island>
           <p>Skills</p>
         </Island>
 
-        <AnimatedCloudSection />
+        <AnimatedCloudSection /> */}
 
         <Experience />
 

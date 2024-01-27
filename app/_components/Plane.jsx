@@ -49,13 +49,10 @@ const Animation = ({
 
   return (
     <div
-      className="w-[100px] h-[100px] absolute z-10 "
+      className="w-[100px] h-[100px] absolute z-10 transition-all duration-1000"
       style={{ left: offset.x, top: offset.y }}
     >
-      <div
-        className={clsx("pointer-events-none absolute border", {})}
-        style={{}}
-      >
+      <div className={clsx("pointer-events-none absolute", {})} style={{}}>
         <div
           className="[perspective: 100px] w-[100px] h-[100px]  "
           style={{ perspective: "100px", transform: "rotate(180deg)" }}

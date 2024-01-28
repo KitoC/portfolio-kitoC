@@ -1,6 +1,7 @@
 "use client";
 
 import About from "./About";
+import Banner from "./Banner";
 import Experience from "./Experience";
 import Island from "./Island";
 import Plane from "./Plane";
@@ -26,13 +27,12 @@ const Content = () => {
     setIniticalCoords([left - 20, top]);
   }, []);
 
-  const spacer = <div className="h-screen" />;
-
   return (
     <div
       id="content-container"
       className="h-screen w-full relative overflow-hidden"
     >
+      <Banner />
       <div
         className={clsx(
           "h-screen w-full absolute bg-white flex items-center justify-center text-black z-40 transition-all duration-[3000ms] pointer-events-none",
@@ -59,8 +59,10 @@ const Content = () => {
         <Island>
           <div
             id="airstrip-1"
-            className="bg-gray-600 p-4 min-w-[60px] rounded flex text-black"
-          />
+            className="bg-gray-600 p-4 min-w-[60px] rounded flex justify-center text-black"
+          >
+            <div className="border-dashed border border-amber-100 h-full w-[1px]" />
+          </div>
           <div>
             <About />
             <br></br>

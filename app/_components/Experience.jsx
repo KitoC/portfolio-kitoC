@@ -1,3 +1,4 @@
+import SkillPill from "./SkillPill";
 import Island from "./Island";
 
 const jobs = [
@@ -214,9 +215,7 @@ const Experience = () => {
               {job.description}
               <div className="flex gap-2 flex-wrap">
                 {job.skills.map((skill) => (
-                  <p className="bg-slate-500 rounded-full px-3" key={skill}>
-                    {skill}
-                  </p>
+                  <SkillPill key={skill} skill={skill}></SkillPill>
                 ))}
               </div>
             </div>

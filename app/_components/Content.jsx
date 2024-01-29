@@ -3,6 +3,7 @@
 import About from "./About";
 import Banner from "./Banner";
 import Experience from "./Experience";
+import Projects from "./Projects";
 import Island from "./Island";
 import Plane from "./Plane";
 import AnimatedCloudSection from "./AnimatedCloudSection";
@@ -43,8 +44,7 @@ const Content = () => {
       <div
         id="scroll-container"
         className={clsx(
-          `h-screen w-full overflow-scroll no-scrollbar relative`,
-          {}
+          "h-screen w-full overflow-scroll no-scrollbar overflow-x-hidden relative"
         )}
       >
         {initialCoords && <Plane initialCoords={initialCoords} />}
@@ -58,10 +58,6 @@ const Content = () => {
           </div>
           <div>
             <About />
-            <br></br>
-            <button onClick={onJourneyClick}>
-              Click the plane to take off and start scrolling the skies with me!
-            </button>
           </div>
         </Island>
         <AnimatedCloudSection />
@@ -75,9 +71,7 @@ const Content = () => {
         <Experience />
 
         <AnimatedCloudSection />
-        <AnimatedCloudSection>
-          <div id="Projects">Projects</div>
-        </AnimatedCloudSection>
+        <Projects />
 
         <AnimatedCloudSection />
       </div>

@@ -1,64 +1,80 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { random, range } from "lodash";
 import CSSCloud from "./CSSCloud";
 import clsx from "clsx";
 
 const AnimatedCloud = ({ sectionId, id }) => {
-  const [scale] = useState(random(0.9, 1.4, true));
-  const [coords] = useState([random(-10, 110), random(-10, 110)]);
+  const [isReady, setIsReady] = useState(false);
+  const [scale, setScale] = useState(0);
+  const [coords, setCoords] = useState([0, 0]);
   const [idleCoords, setIdleCoords] = useState([0, 0]);
   const [x, y] = idleCoords;
 
   const ref = useRef();
 
+  const animateCloud = useCallback(() => {
+    setIdleCoords([random(-20, 20), random(-20, 20)]);
+    setScale(random(0.9, 1.4, true));
+    setCoords([random(-10, 110), random(-10, 110)]);
+  }, []);
+
+  useEffect(() => {}, []);
+
   useEffect(() => {
+    if (scale === 0) {
+      animateCloud();
+      setTimeout(() => {
+        setIsReady(true);
+      }, 100);
+    }
+
     const interval = setInterval(() => {
-      setIdleCoords([random(-20, 20), random(-20, 20)]);
-    }, 3000);
+      animateCloud();
+    }, random(3000, 5000));
 
     return () => clearInterval(interval);
-  }, []);
+  }, [scale, animateCloud]);
 
   return (
     <div
-      ref={ref}
-      id={`${sectionId}-${id}`}
-      className={clsx("z-20 w-fit")}
+      className={clsx("z-20 w-fit absolute transition-all")}
       style={{
-        scale,
-        position: "absolute",
         left: `${coords[0]}%`,
         top: `${coords[1]}%`,
-        transform: `translate(${x}px, ${y}px)`,
-        transition: "all 4s",
+        transitionDuration: !isReady ? "0s" : "100s",
       }}
     >
-      <CSSCloud />
+      <div
+        ref={ref}
+        className={clsx("z-20 w-fit absolute transition-all")}
+        style={{
+          scale,
+          transform: `translate(${x}px, ${y}px)`,
+          transitionDuration: !isReady ? "0s" : "5s",
+        }}
+      >
+        <CSSCloud />
+      </div>
     </div>
   );
 };
 
-let section = 0;
-
 const AnimatedClouds = ({ children, hasIsland, flip }) => {
-  const [sectionId] = useState(section++);
-
   if (hasIsland) {
     return (
       <div
-        id={`cloud-section-${sectionId}`}
         className={clsx(
-          "w-screen pointer-events-none relative flex cloud-section gap-16",
-          { "flex-row-reverse": flip }
+          "w-screen pointer-events-none relative flex flex-col lg:flex-row cloud-section lg:gap-16",
+          { "lg:flex-row-reverse": flip }
         )}
       >
-        <div className="p-24 w-2/3">{children}</div>
+        <div className="w-full p-1 lg:p-24 lg:w-2/3">{children}</div>
 
-        <div class=" p-10 grow relative">
+        <div className="p-10 grow relative">
           {range(2).map((cloud) => (
-            <AnimatedCloud key={cloud} id={cloud} sectionId={sectionId} />
+            <AnimatedCloud key={cloud} id={cloud} />
           ))}
         </div>
       </div>
@@ -66,12 +82,9 @@ const AnimatedClouds = ({ children, hasIsland, flip }) => {
   }
 
   return (
-    <div
-      id={`cloud-section-${sectionId}`}
-      className="w-screen h-screen pointer-events-none relative"
-    >
+    <div className="w-screen h-screen pointer-events-none relative">
       {range(4).map((cloud) => (
-        <AnimatedCloud key={cloud} id={cloud} sectionId={sectionId} />
+        <AnimatedCloud key={cloud} id={cloud} />
       ))}
     </div>
   );

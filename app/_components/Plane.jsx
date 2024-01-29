@@ -7,6 +7,7 @@ import clsx from "clsx";
 import { useCallback, useEffect, useState, useRef, useMemo } from "react";
 import { debounce } from "lodash";
 import { useWindowSize, usePrevious } from "@uidotdev/usehooks";
+import { useGesture } from "@use-gesture/react";
 
 const FLY_SPEED = 1000;
 const IDLE_SPEED = 200;
@@ -31,7 +32,7 @@ const Animation = ({
   const [direction, setDirection] = useState(270);
 
   const handleDirectionChange = useCallback(
-    (dir, debug) => {
+    (dir) => {
       let newDirection = dir;
 
       while (Math.abs(direction - newDirection) > 180) {
@@ -40,10 +41,6 @@ const Animation = ({
         } else if (newDirection < direction) {
           newDirection += 360;
         }
-      }
-
-      if (debug) {
-        console.log(newDirection, direction);
       }
 
       setDirection(newDirection);
@@ -68,7 +65,6 @@ const Animation = ({
     } else {
       handleDirectionChange(scrollDirection === "s" ? 270 : 90, true);
     }
-    console.log(state);
   }, [
     prevPosition,
     position,
@@ -77,6 +73,8 @@ const Animation = ({
     scrollDirection,
     state,
   ]);
+
+  // console.log(position.x > prevPosition?.x ? "LEFT" : "RIGHT");
 
   return (
     <div
@@ -104,7 +102,12 @@ const Animation = ({
             }}
           >
             <div
-              className={clsx("w-fit relative")}
+              className={clsx("w-fit relative", {
+                // "animate-dipRight":
+                //   position.x < prevPosition?.x || state === STATES.IDLING,
+                // "animate-dipLeft":
+                //   position.x > prevPosition?.x && state !== STATES.IDLING,
+              })}
               style={{ animationFillMode: "forwards" }}
             >
               <div className="relative z-10">
@@ -127,17 +130,15 @@ const Plane = ({ initialCoords }) => {
   const [index, setIndex] = useState(0);
   const [state, setState] = useState(STATES.LANDED);
   const [idleCoords, setIdleCoords] = useState([]);
+  const [_scrollY, _setScrollY] = useState(0);
   const [position, setPosition] = useState({
     x: initialCoords[0],
     y: initialCoords[1],
   });
-
-  const prevState = usePrevious();
-
-  let movementSpeed = state === STATES.IDLING ? IDLE_SPEED : FLY_SPEED;
-
   const [scrollY, setScrollY] = useState(initialCoords[1]);
   const [scrollDirection, setScrollDirection] = useState("s");
+
+  let movementSpeed = state === STATES.IDLING ? IDLE_SPEED : FLY_SPEED;
 
   const windowSize = useWindowSize();
 
@@ -149,11 +150,10 @@ const Plane = ({ initialCoords }) => {
     [windowSize]
   );
 
-  const debouncedSetIdle = useRef(debounce(() => setState(STATES.IDLING), 500));
-
   const handleTakeoff = useCallback(() => {
     const airStrip = document.getElementById("airstrip-1");
-    const { bottom } = airStrip.getBoundingClientRect();
+    const rects = airStrip.getBoundingClientRect();
+    const { bottom } = rects;
 
     if (bottom <= 200) {
       setState(STATES.TAKING_OFF);
@@ -165,39 +165,36 @@ const Plane = ({ initialCoords }) => {
     }
   }, [idleCoords, index]);
 
-  useEffect(() => {
-    const el = document.getElementById("scroll-container");
+  useGesture(
+    {
+      onScroll: () => {
+        const el = document.getElementById("scroll-container");
 
-    const onScrollStart = () => {
-      const nextDirection = scrollY < el.scrollTop ? "s" : "n";
-      setScrollY(el.scrollTop);
-      if (scrollDirection !== nextDirection) {
-        setScrollDirection(nextDirection);
-      }
+        const nextDirection = scrollY < el.scrollTop ? "s" : "n";
+        setScrollY(el.scrollTop);
 
-      if (state === STATES.TAKING_OFF) return;
+        if (scrollDirection !== nextDirection && scrollY !== el.scrollTop) {
+          setScrollDirection(nextDirection);
+        }
 
-      if (state === STATES.LANDED) {
-        handleTakeoff(el.scrollTop);
-      } else {
-        setState(STATES.FLYING);
-      }
-    };
+        if (state === STATES.TAKING_OFF) return;
 
-    const onScrollEnd = () => {
-      if (state === STATES.FLYING) {
-        debouncedSetIdle.current(true);
-      }
-    };
-
-    el.addEventListener("scroll", onScrollStart);
-    el.addEventListener("scrollend", onScrollEnd);
-
-    return () => {
-      el.removeEventListener("scroll", onScrollStart);
-      el.removeEventListener("scrollend", onScrollEnd);
-    };
-  }, [handleTakeoff, state, scrollY, index, scrollDirection]);
+        if (state === STATES.LANDED) {
+          handleTakeoff(el.scrollTop);
+        } else {
+          setState(STATES.FLYING);
+        }
+      },
+      onScrollEnd: () => {
+        if (![STATES.LANDED, STATES.TAKING_OFF].includes(state)) {
+          setState(STATES.IDLING);
+        }
+      },
+    },
+    {
+      target: document.getElementById("scroll-container"),
+    }
+  );
 
   useEffect(() => {
     const points = [];
@@ -211,6 +208,7 @@ const Plane = ({ initialCoords }) => {
       points.push({ x, y });
     }
     setIdleCoords(points);
+    setIndex(items / 4 - 1);
   }, [windowCenter]);
 
   useEffect(() => {
@@ -228,59 +226,52 @@ const Plane = ({ initialCoords }) => {
 
     const timeout = setTimeout(moveToNextPoint, movementSpeed);
     return () => clearTimeout(timeout);
-  }, [index, state, prevState, movementSpeed, idleCoords]);
+  }, [index, state, movementSpeed, idleCoords]);
 
   const shadowDisplacement = state === STATES.LANDED ? 13 : 80;
 
   return (
     <>
-      {/* <div className="fixed left-0 top-0 z-50">
-        <p>STATE: {state}</p>
-        <p>movementSpeed: {movementSpeed}</p>
-      </div> */}
-
-      {/* <div
-        className="fixed w-[5px] h-[5px] bg-red-600"
-        style={{ left: `${position?.x}px`, top: `${position?.y}px` }}
-      ></div> */}
-      <div
-        onClick={handleTakeoff}
-        className={clsx("sticky w-[100px] h-0 z-10 transition-all", {
-          "ease-in": state === STATES.TAKING_OFF,
-          "ease-linear": state !== STATES.TAKING_OFF,
-        })}
-        style={{
-          left: `${position?.x}px`,
-          top: `${position?.y}px`,
-          transitionDuration: `${movementSpeed}ms`,
-        }}
-      >
+      <div className="fixed w-screen h-screen z-10 pointer-events-none">
         <div
-          className={clsx("w-full h-full", {
-            "animate-planeTakeOff": state !== STATES.LANDED,
+          onClick={handleTakeoff}
+          className={clsx("absolute w-[100px] h-0 z-10 transition-all", {
+            "ease-in": state === STATES.TAKING_OFF,
+            "ease-linear": state !== STATES.TAKING_OFF,
           })}
           style={{
-            transform: `scale(0.6) translateY(-30px)`,
+            left: `${position?.x}px`,
+            top: `${position?.y}px`,
+            transitionDuration: `${movementSpeed}ms`,
           }}
         >
-          <Animation
-            movementSpeed={movementSpeed}
-            position={position}
-            scrollDirection={scrollDirection}
-            img={PlaneShadow}
-            offset={{
-              x: -shadowDisplacement,
-              y: shadowDisplacement,
+          <div
+            className={clsx("w-full h-full", {
+              "animate-planeTakeOff": state !== STATES.LANDED,
+            })}
+            style={{
+              transform: `scale(0.6) translateY(-30px)`,
             }}
-            state={state}
-          />
-          <Animation
-            movementSpeed={movementSpeed}
-            position={position}
-            scrollDirection={scrollDirection}
-            img={PlaneImage}
-            state={state}
-          />
+          >
+            <Animation
+              movementSpeed={movementSpeed}
+              position={position}
+              scrollDirection={scrollDirection}
+              img={PlaneShadow}
+              offset={{
+                x: -shadowDisplacement,
+                y: shadowDisplacement,
+              }}
+              state={state}
+            />
+            <Animation
+              movementSpeed={movementSpeed}
+              position={position}
+              scrollDirection={scrollDirection}
+              img={PlaneImage}
+              state={state}
+            />
+          </div>
         </div>
       </div>
     </>

@@ -22,14 +22,14 @@ const config: Config = {
         dipRight: {
           // "0%, 100%": { transform: "rotateY(0deg) rotateZ(0deg)" },
           // "5%": { transform: "rotateY(15deg) rotateZ(10deg)" },
-          "0%, 85%, 100%": { transform: "rotateY(0deg) rotateZ(0deg)" },
-          "5%": { transform: "rotateY(15deg) rotateZ(10deg)" },
-          "35%": { transform: "rotateY(5deg) rotateZ(2deg)" },
+          "0%": { transform: "rotateY(0deg) rotateZ(0deg)" },
+          "85%": { transform: "rotateY(15deg) rotateZ(10deg)" },
+          "100%": { transform: "rotateY(5deg) rotateZ(2deg)" },
         },
         dipLeft: {
-          "0%, 85%, 100%": { transform: "rotateY(0deg) rotateZ(0deg)" },
-          "5%": { transform: "rotateY(-15deg) rotateZ(-10deg)" },
-          "35%": { transform: "rotateY(-5deg) rotateZ(-2deg)" },
+          "0%": { transform: "rotateY(0deg) rotateZ(0deg)" },
+          "85%": { transform: "rotateY(-15deg) rotateZ(-10deg)" },
+          "100%": { transform: "rotateY(-5deg) rotateZ(-2deg)" },
         },
         planeDip: {
           "0%": { transform: "scale(1) rotateX(0deg)" },

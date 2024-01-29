@@ -214,8 +214,8 @@ const Experience = () => {
       <div className="px-24">
         <h1 className="text-3xl">EXPERIENCE</h1>
       </div>
-      {jobs.reverse().map((job, index) => (
-        <>
+      {[...jobs].reverse().map((job, index) => (
+        <div key={job.name}>
           <div className="px-24"></div>
           <Island key={job.name} flip={index % 2}>
             <div className="flex flex-col gap-10 text-white">
@@ -235,7 +235,7 @@ const Experience = () => {
               </div>
             </div>
           </Island>
-        </>
+        </div>
       ))}
     </>
   );

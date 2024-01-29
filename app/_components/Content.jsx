@@ -76,7 +76,7 @@ const Content = () => {
 
         <AnimatedCloudSection />
         <AnimatedCloudSection>
-          <div id="Projects">Projects</div>{" "}
+          <div id="Projects">Projects</div>
         </AnimatedCloudSection>
 
         <AnimatedCloudSection />

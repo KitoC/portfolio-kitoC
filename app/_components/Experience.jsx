@@ -191,6 +191,21 @@ const jobs = [
       "ViewComponent",
     ],
   },
+  {
+    name: "Capability Psychology",
+    location: "Remote, Australia",
+    dates: "10/2023 - 12/2023",
+    type: "Freelancing",
+    description: (
+      <>
+        <p>
+          Freelancing work for a friend. They wanted a fresh new look for their
+          site and to extend some capabilities.
+        </p>
+      </>
+    ),
+    skills: ["React", "Typescript", "Gatsby", "GraphQL", "Contentful"],
+  },
 ];
 
 const Experience = () => {
@@ -199,7 +214,7 @@ const Experience = () => {
       <div className="px-24">
         <h1 className="text-3xl">EXPERIENCE</h1>
       </div>
-      {jobs.map((job, index) => (
+      {jobs.reverse().map((job, index) => (
         <>
           <div className="px-24"></div>
           <Island key={job.name} flip={index % 2}>

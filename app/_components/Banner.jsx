@@ -1,14 +1,21 @@
-import SkillPill from "./SkillPill";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 const Banner = () => {
   return (
-    <div className="bg-white text-slate-800 w-full fixed bottom-0 z-40 p-4 flex flex-col gap-2">
-      <h1 className="text-xl font-bold uppercase">
-        Kito Clark - Fullstack developer
-      </h1>
-      <div>
-        <div className="flex gap-2 flex-wrap">
-          <SkillPill skill="React" />
+    <div className="bg-white text-slate-800 w-full fixed bottom-0 z-40 p-8 flex flex-col gap-2">
+      <div className="flex justify-between">
+        <h1 className="text-2xl font-bold uppercase">
+          Kito Clark - Fullstack developer
+        </h1>
+
+        <div className="flex gap-3">
+          <a href="https://github.com/KitoC" target="_blank">
+            <FontAwesomeIcon size="2xl" icon={faGithub} />
+          </a>
+          <a href="https://linkedin.com/in/kito-clark" target="_blank">
+            <FontAwesomeIcon size="2xl" icon={faLinkedin} />
+          </a>
         </div>
       </div>
     </div>

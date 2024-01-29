@@ -10,7 +10,6 @@ import { useState, useEffect } from "react";
 import clsx from "clsx";
 
 const Content = () => {
-  const [isLanded, setIsLanded] = useState(true);
   const [initialCoords, setIniticalCoords] = useState();
 
   const onJourneyClick = () => {
@@ -48,13 +47,7 @@ const Content = () => {
           {}
         )}
       >
-        {initialCoords && (
-          <Plane
-            isLanded={isLanded}
-            setIsLanded={setIsLanded}
-            initialCoords={initialCoords}
-          />
-        )}
+        {initialCoords && <Plane initialCoords={initialCoords} />}
 
         <Island>
           <div

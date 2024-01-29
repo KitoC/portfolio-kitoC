@@ -61,9 +61,14 @@ const config: Config = {
           // "50%": { transform: "rotate(-180deg) translate(0px, 200px)" },
           "100%": { transform: "rotate(-360deg)" },
         },
+        planeTakeOff: {
+          "0%": { transform: "scale(0.6) translateY(-30px)" },
+          "100%": { transform: "scale(1) translateY(0)" },
+        },
       },
       animation: {
         planeIdle: "planeIdle 1s ease-in-out infinite",
+        planeTakeOff: "planeTakeOff 1s ease-in-out forwards",
         planeCircle: "planeCircle 12s linear infinite",
         planeCircleAlt: "planeCircleAlt 10s linear infinite",
         planeDip: "planeDip 1s ease-in-out",

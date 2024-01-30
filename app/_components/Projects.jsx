@@ -51,6 +51,10 @@ const Projects = () => {
             <br />
             Most of these projects are tech based, however there might be some
             here that aren&apos;t because they are just cool and fun!
+            <br />
+            <br />
+            Green flight towers means they are deployed and live. Yellow, in
+            progress. Red, abandoned/defunct.
           </p>
         </div>
       </Island>
@@ -80,7 +84,7 @@ const Projects = () => {
                 ))}
               </div>
 
-              <div className="absolute right-0 top-0 p-8">
+              <div className="absolute right-0 top-[-80px] p-8">
                 <ProjectStatus status={project.status} />
               </div>
             </div>

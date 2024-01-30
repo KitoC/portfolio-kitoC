@@ -50,28 +50,39 @@ const Content = () => {
         {initialCoords && <Plane initialCoords={initialCoords} />}
 
         <Island>
-          <div
-            id="airstrip-1"
-            className="bg-gray-600 p-4 min-w-[60px] rounded flex justify-center text-black"
-          >
-            <div className="border-dashed border border-amber-100 h-full w-[1px]" />
-          </div>
-          <div>
-            <About />
+          <div className="flex md:flex-row flex-col-reverse gap-8">
+            <div
+              id="airstrip-1"
+              className="bg-gray-600 p-4 min-w-[60px] h-[250px] w-[60px] rounded flex justify-center text-black"
+            >
+              <div className="border-dashed border border-amber-100 h-full w-[1px]" />
+            </div>
+            <div>
+              <About />
+            </div>
           </div>
         </Island>
         <AnimatedCloudSection />
-
-        {/* <Island>
-          <p>Skills</p>
-        </Island>
-
-        <AnimatedCloudSection /> */}
 
         <Experience />
 
         <AnimatedCloudSection />
         <Projects />
+
+        <AnimatedCloudSection />
+
+        <Island>
+          <p>
+            This site was built with React & NextJS. Everything was achieved
+            with CSS except for the plane which I drew in Inkscape.
+            <br />
+            <br />
+            If you would like to get in touch, please feel free to reach out on{" "}
+            <a className="underline" href="https://linkedin.com/in/kito-clark">
+              LinkedIn
+            </a>
+          </p>
+        </Island>
 
         <AnimatedCloudSection />
       </div>

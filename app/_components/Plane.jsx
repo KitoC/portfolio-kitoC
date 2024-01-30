@@ -151,11 +151,9 @@ const Plane = ({ initialCoords }) => {
   );
 
   const handleTakeoff = useCallback(() => {
-    const airStrip = document.getElementById("airstrip-1");
-    const rects = airStrip.getBoundingClientRect();
-    const { bottom } = rects;
+    const el = document.getElementById("scroll-container");
 
-    if (bottom <= 200) {
+    if (el.scrollTop >= 220) {
       setState(STATES.TAKING_OFF);
 
       setTimeout(() => {

@@ -2,14 +2,14 @@ import SkillPill from "./SkillPill";
 import Island from "./Island";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowUpRightFromSquare } from "@fortawesome/free-solid-svg-icons";
-
+import LINKS from "../_constants/links";
 const jobs = [
   {
     name: "Bridj",
     location: "Brisbane, Australia",
     dates: "01/2019 - 03/2021",
     type: "Full-time",
-    link: "https://www.bridj.com",
+    link: LINKS.BRIDJ,
     description: (
       <>
         <p>
@@ -82,7 +82,7 @@ const jobs = [
     location: "Remote, Australia/Mexico",
     dates: "09/2021 - 10/2022",
     type: "Full-time",
-    link: "https://nextpracticehealth.com",
+    link: LINKS.NEXT_PRACTICE,
     description: (
       <>
         <p>
@@ -128,7 +128,7 @@ const jobs = [
     location: "Remote, Mexico/Brazil",
     dates: "10/2022 - 03/2023",
     type: "Contract",
-    link: "https://www.sandboxaq.com",
+    link: LINKS.SANDBOX_AQ,
     description: (
       <>
         <p>
@@ -165,7 +165,7 @@ const jobs = [
     location: "Remote, Brazil/Australia",
     dates: "03/2023 - 09/2023",
     type: "Contract",
-    link: "https://simplero.com",
+    link: LINKS.SIMPLERO,
     description: (
       <>
         <p>
@@ -202,7 +202,7 @@ const jobs = [
     location: "Remote, Australia",
     dates: "10/2023 - 12/2023",
     type: "Freelancing",
-    link: "https://capabilitypsychology.com.au",
+    link: LINKS.CAPABILITY_PSYCHOLOGY,
     description: (
       <>
         <p>
@@ -233,7 +233,7 @@ const Experience = () => {
                 <h3>{job.type}</h3>
                 <h3>{job.location}</h3>
                 {job.link && (
-                  <a className="mt-4" href={job.link} target="_blank">
+                  <a className="mt-4 underline" href={job.link} target="_blank">
                     {job.link}
                     <FontAwesomeIcon
                       className="ml-2"

@@ -219,7 +219,7 @@ const Experience = () => {
         );
 
         return (
-          <div key={job.name}>
+          <div id={job.name} key={job.name}>
             <div className="px-24"></div>
             <Island key={job.name} flip={index % 2}>
               <div className="flex flex-col gap-8">

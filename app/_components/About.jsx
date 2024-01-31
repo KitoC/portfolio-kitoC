@@ -10,26 +10,26 @@ const About = () => {
       <h3 className={headingClassname}>My story</h3>
       <p>
         I started my coding journey in 2018 by attending a{" "}
-        <a className={linkClassName} href={LINKS.CODER_ACADEMY}>
+        <a className={linkClassName} href={LINKS.CODER_ACADEMY} target="_blank">
           coding boot-camp
         </a>{" "}
         and discovered a hidden passion (and at times unhealthy addiction) from
         the first line of code I wrote. This journey has provided me with the
         skills and privilege of building software in a range of companies and
         industries including{" "}
-        <a className={linkClassName} href={LINKS.BRIDJ}>
+        <a className={linkClassName} href="#Bridj">
           public transport
-        </a>{" "}
+        </a>
         ,{" "}
-        <a className={linkClassName} href={LINKS.NEXT_PRACTICE}>
+        <a className={linkClassName} href="#NextPractice">
           health care
-        </a>{" "}
+        </a>
         ,{" "}
-        <a className={linkClassName} href={LINKS.SANDBOX_AQ}>
+        <a className={linkClassName} href="#SandboxAQ">
           cyber security
         </a>{" "}
         and{" "}
-        <a className={linkClassName} href={LINKS.SIMPLERO}>
+        <a className={linkClassName} href="#Simplero">
           online marketing and course creation.
         </a>{" "}
       </p>

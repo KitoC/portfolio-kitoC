@@ -76,7 +76,7 @@ const Projects = () => {
       </div>
 
       <Island>
-        <div className="flex flex-col gap-10 text-white">
+        <div className="flex flex-col gap-10">
           <p>
             In my spare time I like to tinker with things. Whether these
             tinkerings actually get completed or go anywhere is another matter.
@@ -103,7 +103,7 @@ const Projects = () => {
           <>
             <div className="px-24"></div>
             <Island key={project.name} flip={index % 2}>
-              <div className="flex flex-col gap-10 text-white">
+              <div className="flex flex-col gap-10 ">
                 <div className="flex flex-col gap-2">
                   <h2 className="text-xl font-bold">{project.name}</h2>
 

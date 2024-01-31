@@ -36,7 +36,7 @@ const Content = () => {
       <div
         id="scroll-container"
         className={clsx(
-          "h-screen w-full overflow-scroll no-scrollbar overflow-x-hidden relative"
+          "h-screen w-full overflow-scroll no-scrollbar overflow-x-hidden relative pt-20"
         )}
       >
         <Banner />
@@ -67,8 +67,8 @@ const Content = () => {
 
         <Island>
           <p>
-            This site was built with React & NextJS. Everything was achieved
-            with CSS except for the plane which I drew in Inkscape.
+            This site was built with React, NextJS & Tailwind. Everything was
+            achieved with CSS except for the plane which I drew in Inkscape.
             <br />
             <br />
             If you would like to get in touch, please feel free to reach out on{" "}

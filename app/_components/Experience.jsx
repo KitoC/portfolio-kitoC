@@ -199,7 +199,7 @@ const Experience = () => {
         <div key={job.name}>
           <div className="px-24"></div>
           <Island key={job.name} flip={index % 2}>
-            <div className="flex flex-col text-green-900">
+            <div className="flex flex-col ">
               <div className="flex flex-col gap-2 mb-8">
                 <div className="flex justify-between flex-wrap">
                   <h2 className="text-2xl font-bold">{job.name}</h2>
@@ -226,7 +226,9 @@ const Experience = () => {
                 </div>
               </div>
 
-              <div className="flex items-end gap-2 flex-wrap">
+              <h3 className="font-bold">Skills</h3>
+
+              <div className="flex items-end gap-2 flex-wrap mt-12">
                 {job.skills.map((skill) => (
                   <SkillPill key={skill} skill={skill}></SkillPill>
                 ))}

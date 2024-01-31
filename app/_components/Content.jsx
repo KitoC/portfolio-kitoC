@@ -2,6 +2,7 @@
 
 import About from "./About";
 import Banner from "./Banner";
+import Itinerary from "./Itinerary";
 import Experience from "./Experience";
 import Projects from "./Projects";
 import Island from "./Island";
@@ -36,24 +37,25 @@ const Content = () => {
       <div
         id="scroll-container"
         className={clsx(
-          "h-screen w-full overflow-scroll no-scrollbar overflow-x-hidden relative pt-20"
+          "h-screen w-full overflow-scroll no-scrollbar overflow-x-hidden relative"
         )}
       >
         <Banner />
+        <Itinerary />
 
         {initialCoords && <Plane initialCoords={initialCoords} />}
 
+        <div className="py-8" />
         <Island>
-          <div className="flex md:flex-row flex-col-reverse gap-8">
+          <div id="about" className="flex md:flex-row flex-col-reverse gap-8">
             <div
               id="airstrip-1"
               className="bg-gray-600 p-4 min-w-[60px] h-[250px] w-[60px] rounded flex justify-center text-black"
             >
               <div className="border-dashed border border-amber-100 h-full w-[1px]" />
             </div>
-            <div>
-              <About />
-            </div>
+
+            <About />
           </div>
         </Island>
         <AnimatedCloudSection />

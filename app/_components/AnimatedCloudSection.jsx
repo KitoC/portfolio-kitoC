@@ -70,7 +70,7 @@ const AnimatedClouds = ({ children, hasIsland, flip }) => {
           { "lg:flex-row-reverse": flip }
         )}
       >
-        <div className="w-full p-1 lg:p-24 lg:w-2/3">{children}</div>
+        <div className="w-full p-1 lg:p-24 lg:w-11/12 xl:w-5/6">{children}</div>
 
         <div className="p-10 grow relative pointer-events-none">
           {range(2).map((cloud) => (
@@ -82,7 +82,7 @@ const AnimatedClouds = ({ children, hasIsland, flip }) => {
   }
 
   return (
-    <div className="w-screen h-screen pointer-events-none relative">
+    <div className="w-screen h-1/2 pointer-events-none relative">
       {range(4).map((cloud) => (
         <AnimatedCloud key={cloud} id={cloud} />
       ))}

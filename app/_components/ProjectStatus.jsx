@@ -10,7 +10,7 @@ export const STATUS = {
 
 const STATUS_COLORS = {
   [STATUS.ABANDONED]: Color("#dc2626"),
-  [STATUS.LIVE]: Color("#06b6d4"),
+  [STATUS.LIVE]: Color("#65a30d"),
   [STATUS.IN_PROGRESS]: Color("#fbbf24"),
 };
 

@@ -1,4 +1,5 @@
 const LINKS = {
+  CODER_ACADEMY: "https://info.coderacademy.edu.au/full-stack-web-development",
   BRIDJ: "https://www.bridj.com",
   NEXT_PRACTICE: "https://nextpracticehealth.com",
   SANDBOX_AQ: "https://www.sandboxaq.com",

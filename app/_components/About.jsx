@@ -1,5 +1,8 @@
+import LINKS from "../_constants/links";
+
 const About = () => {
-  const headingClassname = "font-semibold text-lg mb-2 mt-4 first:mt-0";
+  const headingClassname =
+    "font-semibold text-lg mb-2 mt-4 first:mt-0 capitalize";
   const linkClassName = "underline font-semibold";
 
   return (
@@ -7,29 +10,26 @@ const About = () => {
       <h3 className={headingClassname}>My story</h3>
       <p>
         I started my coding journey in 2018 by attending a{" "}
-        <a
-          className={linkClassName}
-          href="https://info.coderacademy.edu.au/full-stack-web-development"
-        >
-          coding bootcamp
+        <a className={linkClassName} href={LINKS.CODER_ACADEMY}>
+          coding boot-camp
         </a>{" "}
         and discovered a hidden passion (and at times unhealthy addiction) from
         the first line of code I wrote. This journey has provided me with the
-        skills and privelage of building software in a range of companies and
+        skills and privilege of building software in a range of companies and
         industries including{" "}
-        <a className={linkClassName} href="bridj.com">
+        <a className={linkClassName} href={LINKS.BRIDJ}>
           public transport
         </a>{" "}
         ,{" "}
-        <a className={linkClassName} href="nextpracticehealth.com.au">
+        <a className={linkClassName} href={LINKS.NEXT_PRACTICE}>
           health care
         </a>{" "}
         ,{" "}
-        <a className={linkClassName} href="sandboxaq.com">
+        <a className={linkClassName} href={LINKS.SANDBOX_AQ}>
           cyber security
         </a>{" "}
         and{" "}
-        <a className={linkClassName} href="sandboxaq.com">
+        <a className={linkClassName} href={LINKS.SIMPLERO}>
           online marketing and course creation.
         </a>{" "}
       </p>
@@ -46,8 +46,11 @@ const About = () => {
       <h3 className={headingClassname}>My interests</h3>
       <p>
         In my personal time I enjoy travel, surfing and Muay Thai. I also have a
-        newfound passion for woodworking, and in specific building wooden
-        surfboards.
+        new found passion for woodworking, specifically wooden surfboards.
+      </p>
+
+      <p className="mt-8 font-bold">
+        Scroll the skies to see where my journey has taken me!
       </p>
     </div>
   );

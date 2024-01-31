@@ -3,7 +3,7 @@ import { faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 
 const Banner = () => {
   return (
-    <div className="bg-white text-slate-800 w-full fixed bottom-0 z-40 p-4 lg:p-8 flex flex-col gap-2">
+    <div className="bg-white text-slate-800 w-full fixed top-0 z-40 p-4 lg:p-8 flex flex-col gap-2">
       <div className="flex flex-col lg:flex-row justify-between">
         <h1 className="text-xl lg:text-2xl font-bold uppercase">
           Kito Clark - Fullstack developer

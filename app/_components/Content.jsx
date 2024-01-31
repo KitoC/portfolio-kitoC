@@ -13,13 +13,6 @@ import clsx from "clsx";
 const Content = () => {
   const [initialCoords, setIniticalCoords] = useState();
 
-  const onJourneyClick = () => {
-    const element = document.getElementById("About");
-    element.scrollIntoView({
-      behavior: "smooth",
-    });
-  };
-
   useEffect(() => {
     const airStrip = document.getElementById("airstrip-1");
     const { left, top } = airStrip.getBoundingClientRect();
@@ -32,7 +25,6 @@ const Content = () => {
       id="content-container"
       className="h-screen w-full relative overflow-hidden"
     >
-      <Banner />
       <div
         className={clsx(
           "h-screen w-full absolute bg-white flex items-center justify-center text-black z-40 transition-all duration-[3000ms] pointer-events-none",
@@ -47,6 +39,8 @@ const Content = () => {
           "h-screen w-full overflow-scroll no-scrollbar overflow-x-hidden relative"
         )}
       >
+        <Banner />
+
         {initialCoords && <Plane initialCoords={initialCoords} />}
 
         <Island>

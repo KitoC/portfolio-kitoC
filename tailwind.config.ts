@@ -65,6 +65,16 @@ const config: Config = {
           "0%": { transform: "scale(0.6) translateY(-30px)" },
           "100%": { transform: "scale(1) translateY(0)" },
         },
+        islandShallows: {
+          "0%, 100%": {
+            boxShadow:
+              "0 0 0 5px rgba(255,255,255,0.1), 0 0 0 5px rgba(255,255,255,0.1)",
+          },
+          "50%": {
+            boxShadow:
+              "0 0 0 30px rgba(255,255,255,0.1),  0 0 0 10px rgba(255,255,255,0.1)",
+          },
+        },
       },
       animation: {
         planeIdle: "planeIdle 1s ease-in-out infinite",
@@ -76,6 +86,7 @@ const config: Config = {
         dipRight: "dipRight 6s ease-in-out",
         dipLeft: "dipLeft 6s ease-in-out",
         cloudAnimation: "cloudAnimation 8s ease-in-out infinite",
+        islandShallows: "islandShallows 6s ease-in-out infinite",
       },
     },
   },

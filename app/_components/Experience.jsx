@@ -167,22 +167,67 @@ const jobs = [
       "ViewComponent",
     ],
   },
-  // {
-  //   name: "Capability Psychology",
-  //   location: "Remote, Australia",
-  //   dates: "10/2023 - 12/2023",
-  //   type: "Freelancing",
-  //   link: LINKS.CAPABILITY_PSYCHOLOGY,
-  //   description: (
-  //     <>
-  //       <p>
-  //         Freelancing work for a friend. They wanted a fresh new look for their
-  //         site and to extend some capabilities.
-  //       </p>
-  //     </>
-  //   ),
-  //   skills: ["React", "Typescript", "Gatsby", "GraphQL", "Contentful"],
-  // },
+  {
+    name: "Short career interlude",
+    location: "Remote, Australia",
+    from: "09/09/2023",
+    to: "02/01/2023",
+    type: "Fulltime",
+    link: LINKS.TEAMFORM,
+    description: (
+      <p>
+        I took a short career break to follow a passion project. I found a
+        passion in building surfboards from wood. I spent time in the workshop
+        crafting a variety of surfboards and learning the art of shaping. I also
+        spent time freelancing for a few clients to ensure my coding skills
+        didn&apos;t get too dusty.
+      </p>
+    ),
+    skills: [
+      "Surfboard shaping",
+      "Woodworking skills",
+      "Machinery skills",
+      "Hand carving tools",
+    ],
+    achievements: [
+      "Built 12 surfboards of varying shapes and sizes.",
+      "Learned how to use a variety of woodworking tools.",
+      "Learned how to use a surfboard shaping software.",
+      "Put myself out there with my creations at a few markets to show my boards to the community.",
+    ],
+  },
+  {
+    name: "TeamForm",
+    location: "Remote, Australia",
+    from: "02/01/2023",
+    to: "Present",
+    type: "Fulltime",
+    link: LINKS.TEAMFORM,
+    description: (
+      <p>
+        TeamForm allows provides an interface with a teams first view of
+        organizations. It shows full visibility of the teams, their roles and
+        objectives. It provides visualization tools to understand your
+        organization better and a host of other useful features that help in
+        providing clarity within large companies.
+      </p>
+    ),
+    skills: [
+      "React",
+      "GraphQL",
+      "NodeJS",
+      "Jest",
+      "PostgresQL",
+      "Storybook",
+      "ElasticSearch",
+    ],
+    achievements: [
+      "Consolidated two apps into one to bring parity between the two.",
+      "Refactored existing code for better readability and maintainability.",
+      "Worked on complex SQL queries for providing recursive data structures.",
+      "Developed visualization UI with React.",
+    ],
+  },
 ];
 
 const formatFromAndTo = (from, to) => {
@@ -190,14 +235,14 @@ const formatFromAndTo = (from, to) => {
   const toDate = dayjs(to);
 
   const format = "MMM YYYY";
+
   return (
     <>
       <span>{fromDate.format(format)}</span>
       <FontAwesomeIcon size="xs" className="mx-3" icon={faPlane} />
-      <span>{toDate.format(format)}</span>
+      <span>{to === "Present" ? to : toDate.format(format)}</span>
     </>
   );
-  return `${fromDate.format(format)} ... ${toDate.format(format)}`;
 };
 const Experience = () => {
   return (

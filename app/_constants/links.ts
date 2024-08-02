@@ -12,6 +12,7 @@ const LINKS = {
   GITHUB_FOLK_SERVICE: "https://github.com/KitoC/folk-service",
   UP_TRACKER: "https://legendary-puppy-8152c1.netlify.app",
   FOLK_SERVICE: "https://folk-service-production.herokuapp.com/",
+  TEAMFORM: "https://www.teamform.co/",
 };
 
 export default LINKS;

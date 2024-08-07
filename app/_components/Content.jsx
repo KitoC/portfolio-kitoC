@@ -16,9 +16,10 @@ const Content = () => {
 
   useEffect(() => {
     const airStrip = document.getElementById("airstrip-1");
-    const { left, top } = airStrip.getBoundingClientRect();
+    const { left, top, ...rest } = airStrip.getBoundingClientRect();
 
-    setIniticalCoords([left - 20, top]);
+    console.log({ airStrip, top, ...rest });
+    setIniticalCoords([left - 20, top - 124]);
   }, []);
 
   return (
@@ -34,6 +35,7 @@ const Content = () => {
       >
         <h1>Loading...</h1>
       </div>
+
       <div
         id="scroll-container"
         className={clsx(

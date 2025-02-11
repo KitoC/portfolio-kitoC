@@ -214,6 +214,8 @@ const jobs = [
     ),
     skills: [
       "React",
+      "React Flow",
+      "Graphs/Visualizations",
       "GraphQL",
       "NodeJS",
       "Jest",
@@ -226,6 +228,8 @@ const jobs = [
       "Refactored existing code for better readability and maintainability.",
       "Worked on complex SQL queries for providing recursive data structures.",
       "Developed visualization UI with React.",
+      "Developed complex and functional org charts with React Flow",
+      "Developed complex node visualizations for displaying relationships between OKRs, work tasks and teams with React Flow",
     ],
   },
 ];

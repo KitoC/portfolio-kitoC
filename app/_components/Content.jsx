@@ -18,7 +18,6 @@ const Content = () => {
     const airStrip = document.getElementById("airstrip-1");
     const { left, top, ...rest } = airStrip.getBoundingClientRect();
 
-    console.log({ airStrip, top, ...rest });
     setIniticalCoords([left - 20, top - 124]);
   }, []);
 
